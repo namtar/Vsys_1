@@ -1,8 +1,8 @@
 package de.htw.berlin.student.vsys;
 
+import org.apache.log4j.Logger;
+
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * The car as thread.
@@ -38,7 +38,7 @@ public class Auto implements Runnable {
 			Thread.sleep((long) startDelay);
 			LOGGER.info("Start car: " + getKennzeichen());
 		} catch (InterruptedException e) {
-			LOGGER.log(Level.SEVERE, e.getMessage());
+			LOGGER.error(e.getMessage());
 		}
 
 		if (parkhausToUse.hasFreeSlots()) {
@@ -47,7 +47,7 @@ public class Auto implements Runnable {
 			try {
 				Thread.sleep((long) parkingDuration);
 			} catch (InterruptedException e) {
-				LOGGER.log(Level.SEVERE, e.getMessage());
+				LOGGER.error(e.getMessage());
 			}
 
 			parkhausToUse.leave(this);

@@ -1,8 +1,8 @@
 package de.htw.berlin.student.vsys;
 
+import org.apache.log4j.Logger;
+
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Das de.htw.berlin.student.vsys.Parkhaus
@@ -21,7 +21,7 @@ public class Parkhaus {
 			throw new IllegalStateException("There are no slots left....");
 		}
 
-		LOGGER.log(Level.INFO, "Car enters: " + new Date() + ", " + auto.toString());
+		LOGGER.info("Car enters: " + new Date() + ", " + auto.toString());
 		freeSlots++;
 
 		//		this.notify();
@@ -33,7 +33,7 @@ public class Parkhaus {
 			throw new IllegalStateException("The parking deck is already empty.");
 		}
 
-		LOGGER.log(Level.INFO, "Car leaves: " + new Date() + ", " + auto.toString());
+		LOGGER.info("Car leaves: " + new Date() + ", " + auto.toString());
 		freeSlots--;
 
 		//		this.notify();

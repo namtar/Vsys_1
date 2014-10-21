@@ -16,6 +16,7 @@ public class BasicTest {
 
 		for (int i = 0; i < 100; i++) {
 			Thread t = new Thread(new Auto("B-BB " + (i + 1), parkhaus));
+//			System.out.println(i);
 			t.start();
 		}
 	}
