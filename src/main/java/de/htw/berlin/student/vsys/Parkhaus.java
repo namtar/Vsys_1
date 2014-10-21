@@ -11,46 +11,42 @@ import java.util.Date;
  */
 public class Parkhaus {
 
-	private static final Logger LOGGER = Logger.getLogger(Parkhaus.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(Parkhaus.class.getName());
 
-	private short freeSlots = 10;
+    private short freeSlots = 10;
 
-	public synchronized void enter(Auto auto) {
+    public synchronized void enter(Auto auto) {
 
-		if (freeSlots == 0) {
-			throw new IllegalStateException("There are no slots left....");
-		}
+        if (freeSlots == 0) {
+            throw new IllegalStateException("There are no slots left....");
+        }
 
-		LOGGER.info("Car enters: " + new Date() + ", " + auto.toString());
-		freeSlots++;
+        LOGGER.info("Car enters: " + new Date() + ", " + auto.getKennzeichen());
+        freeSlots++;
+    }
 
-		//		this.notify();
-	}
+    public synchronized void leave(Auto auto) {
 
-	public synchronized void leave(Auto auto) {
+        if (freeSlots == 10) {
+            throw new IllegalStateException("The parking deck is already empty.");
+        }
 
-		if (freeSlots == 10) {
-			throw new IllegalStateException("The parking deck is already empty.");
-		}
+        LOGGER.info("Car leaves: " + new Date() + ", " + auto.getKennzeichen());
+        freeSlots--;
+    }
 
-		LOGGER.info("Car leaves: " + new Date() + ", " + auto.toString());
-		freeSlots--;
+    public synchronized boolean hasFreeSlots() {
+        if (freeSlots > 0) {
+            //			this.notify();
+            return true;
+        }
+        return false;
+    }
 
-		//		this.notify();
-	}
-
-	public synchronized boolean hasFreeSlots() {
-		if (freeSlots > 0) {
-			//			this.notify();
-			return true;
-		}
-		//		this.notify();
-		return false;
-	}
-
-	@Override public String toString() {
-		return "de.htw.berlin.student.vsys.Parkhaus{" +
-				"freeSlots=" + freeSlots +
-				'}';
-	}
+    @Override
+    public String toString() {
+        return "de.htw.berlin.student.vsys.Parkhaus{" +
+                "freeSlots=" + freeSlots +
+                '}';
+    }
 }
